@@ -22,6 +22,12 @@ var cursors;
 var score=0;
 var scoreText;
 var gameOver=false;
+var vidas=3;
+var corazones;
+var corazon1,corazon2,corazon3;
+var morena1;
+var morenaGenerada= false;
+var numAleatorio=Math.floor(Math.random()*200);
 
 
 var game=new Phaser.Game(config);
@@ -31,13 +37,18 @@ function preload(){
     this.load.image('ground','images/bandera.png');
     this.load.image('star','images/dinero.png');
     this.load.image('bomb','images/pri.png');
+    this.load.image('corazon','images/vidas.png');
+    this.load.image('morena','images/morena.png');
     this.load.spritesheet('dude','images/amlo1.png',{frameWidth:54.2,frameHeight:49});
+    
 
 }
 function create(){
     this.add.image(750,420,'sky').setDisplaySize(1800,840);
     // this.add.image(400,300,'star');
     platforms=this.physics.add.staticGroup();
+    corazones=this.physics.add.staticGroup();
+
     platforms.create(40,568,'ground').setScale(1, 0.3).refreshBody();
     platforms.create(900,150,'ground').setScale(1, 0.3).refreshBody();
     platforms.create(900,650,'ground').setScale(1, 0.3).refreshBody();
@@ -46,6 +57,9 @@ function create(){
     platforms.create(100,210,'ground').setScale(1, 0.3).refreshBody();
     platforms.create(1350,490,'ground').setScale(1, 0.3).refreshBody();
     platforms.create(40,820,'ground').setScale(10, 0.3).refreshBody().setVisible(false);
+    corazon1=corazones.create(1200,23,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
+    corazon2=corazones.create(1300,23,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
+    corazon3=corazones.create(1400,23,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
   
 
 
@@ -87,17 +101,23 @@ function create(){
     
     });
     bombs=this.physics.add.group();
+    morenas=this.physics.add.group();
 
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#ffffff' });
     this.physics.add.collider(player,platforms);
     this.physics.add.collider(stars, platforms);
     this.physics.add.collider(bombs,platforms);
+    this.physics.add.collider(morenas,platforms);
 
     this.physics.add.overlap(player, stars, collectStar, null, this);
     this.physics.add.collider(player, bombs, hitBomb, null, this);
+    this.physics.add.collider(player, morenas, hitMorenas, null, this);
+    
+
+        
 }
 function update(){
-    if(gameOver){
+    if(gameOver && vidas==0){
         return;
     }
     if (cursors.left.isDown)
@@ -123,6 +143,36 @@ function update(){
         {
             player.setVelocityY(-420);
         }
+        
+        if(score>=380){
+            window.location.href="nevel2.html"
+        }
+ 
+        if (score >=numAleatorio && !morenaGenerada ) {
+            console.log("Generando morena... Score:", score);
+    
+            if (morenas) {
+                var morena1 = morenas.create(Phaser.Math.Between(200, 600), 16, 'morena');
+                morena1.setScale(0.5);
+                morena1.setBounce(1);
+                morena1.setCollideWorldBounds(true);
+                morena1.setVelocity(Phaser.Math.Between(-200, 200), 20);
+                morena1.allowGravity = false;
+                morenaGenerada=true;
+
+                this.time.delayedCall(8000, function () {
+                    if (morena1.active) { // Si aún no ha colisionado
+                        morena1.disableBody(true, true);
+                       
+                        console.log("Morena eliminada automáticamente");
+                    }
+                }, [], this);
+    
+                
+            } else {
+                console.error("⚠️ ERROR: Grupo 'morenas' no definido.");
+            }
+        }
         // if (player.y > 600) {
         //     this.scene.restart();
         //     score = 0;
@@ -142,8 +192,10 @@ function collectStar(player,star){
             child.enableBody(true, child.x, 0, true, true);
 
         });
+        
 
         var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+        
 
         var bomb = bombs.create(x, 16, 'bomb');
         bomb.setScale(0.5);
@@ -151,12 +203,42 @@ function collectStar(player,star){
         bomb.setCollideWorldBounds(true);
         bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
         bomb.allowGravity = false;
+        var bomb = bombs.create(x, 16, 'bomb');
+        bomb.setScale(0.5);
+        bomb.setBounce(1);
+        bomb.setCollideWorldBounds(true);
+        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+        bomb.allowGravity = false;
+        
+        
 
     }
     
 }
 function hitBomb (player, bomb)
-    {
+{
+        
+    if(vidas==3){
+        bomb.disableBody(true, true);
+        corazon3.setVisible(false);
+        vidas--;
+        console.log(vidas)
+
+    }else if(vidas==2){
+        bomb.disableBody(true, true);
+        corazon2.setVisible(false);
+        vidas--;
+        console.log(vidas)
+
+    }else if(vidas ==1) {
+        bomb.disableBody(true, true);
+        corazon1.setVisible(false);
+        vidas--;
+        console.log(vidas)
+
+        
+    }
+     if( vidas==0){
         this.physics.pause();
 
         player.setTint(0xff0000);
@@ -165,3 +247,15 @@ function hitBomb (player, bomb)
 
         gameOver = true;
     }
+
+        
+}
+function hitMorenas(player,morena1){
+    console.log("entrando en el hit");
+
+    score=score+50;
+    scoreText.setText('Score: '+score)
+
+    morena1.disableBody(true, true);
+
+}
