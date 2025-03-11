@@ -1,0 +1,68 @@
+body{
+    font-family: "Pixelify Sans", sans-serif;
+    background-color: #a0423d6f;
+}
+h1{
+    color: #b5261e;
+    font-size: 50px;
+    text-align: center;
+}
+h2{
+    text-align: center;
+}
+p{
+    font-family: "Pixelify Sans", sans-serif;
+    text-align: center;
+}
+input{
+    margin-top: 10px;
+    font-family: "Pixelify Sans", sans-serif;
+    width: 50%;
+    height: 20%;
+}
+a{
+    font-family: "Pixelify Sans", sans-serif;
+    text-decoration: none;
+    color: black;
+}
+.registro{
+    display: flex;
+    justify-content: center;
+}
+.container-player{
+    display: flex;
+    justify-content: space-around;
+
+}
+#div1, #div2 , #div3{
+    width: 75px; 
+    height: 75px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    margin: 10px;
+    min-width: 150px; 
+    min-height: 150px;
+    margin-left: 100px;
+    cursor: grab;
+}
+#div3{
+    background-color: #b5261e;
+}
+.drop{
+    display: flex;
+    justify-content: center;
+}
+.contenedor-botones{
+    display: flex;
+    justify-content: space-evenly;
+}
+.puntaje{
+    margin-left: 10%;
+    width: 80%;
+    text-align: center;
+}

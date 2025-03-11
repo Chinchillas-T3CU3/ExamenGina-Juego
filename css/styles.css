@@ -50,3 +50,7 @@ button:hover {
     width: 800px;
     height: 600px;
 }
+a{
+    text-decoration: none;
+    color: black;
+}
