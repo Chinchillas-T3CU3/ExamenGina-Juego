@@ -57,9 +57,9 @@ function create(){
     platforms.create(100,210,'ground').setScale(1, 0.3).refreshBody();
     platforms.create(1350,490,'ground').setScale(1, 0.3).refreshBody();
     platforms.create(40,820,'ground').setScale(10, 0.3).refreshBody().setVisible(false);
-    corazon1=corazones.create(1200,23,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
-    corazon2=corazones.create(1300,23,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
-    corazon3=corazones.create(1400,23,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
+    corazon1=corazones.create(1200,27,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
+    corazon2=corazones.create(1300,27,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
+    corazon3=corazones.create(1400,27,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
   
 
 
