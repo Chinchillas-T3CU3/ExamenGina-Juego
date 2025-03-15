@@ -1,0 +1,25 @@
+* [33m7a42458[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Erro al juntar va todo desde 0
+* [33m0f082eb[m ya este el server
+*   [33m18e6c11[m Merge branch 'vicente'
+[32m|[m[33m\[m  
+[32m|[m * [33m575fd23[m[33m ([m[1;31morigin/vicente[m[33m, [m[1;32mvicente[m[33m)[m ya quedo todo listo junto con las pantallas de guzman
+[32m|[m * [33m4cf8593[m merge con chinchillas
+[32m|[m *   [33m10ee611[m Merge branch 'No-Escenas' into vicente
+[32m|[m [34m|[m[35m\[m  
+[32m|[m [34m|[m * [33m91a32a3[m[33m ([m[1;31morigin/No-Escenas[m[33m, [m[1;32mNo-Escenas[m[33m)[m Ya esta el como jugar y el canvas
+[32m|[m [34m|[m * [33m9d7eca2[m Menu con seleccion de personaje, validacion de nombre y registo de puntuacion pero no son esenas del phaser
+[32m|[m [34m|[m *   [33mc47534a[m Merge branch 'Alfredo' into No-Escenas
+[32m|[m [34m|[m [36m|[m[1;31m\[m  
+[32m|[m * [36m|[m [1;31m|[m [33m684a199[m Arreglo de bugs
+[32m|[m [36m|[m[36m/[m [1;31m/[m  
+* [36m|[m [1;31m|[m [33m0bc455e[m Ahora si ya esta bien quiete del main la confusion del guzman y ya esta todo lo arreglado
+* [36m|[m [1;31m|[m   [33me9d204a[m[33m ([m[1;31morigin/Guzman[m[33m)[m Merge remote-tracking branch 'origin/Alfredo'
+[36m|[m[1;31m\[m [36m\[m [1;31m\[m  
+[36m|[m [1;31m|[m[36m/[m [1;31m/[m  
+[36m|[m[36m/[m[1;31m|[m [1;31m/[m   
+[36m|[m [1;31m|[m[1;31m/[m    
+[36m|[m * [33m904de86[m[33m ([m[1;31morigin/Alfredo[m[33m)[m Nuevo Menu pero error en escenas
+* [1;33m|[m [33md4b37b8[m nivel2 acabado
+[1;33m|[m[1;33m/[m  
+* [33m69e858c[m ya quedo hasta lo que vieron sus ojos
+* [33m26f4c17[m Initial commit
