@@ -1,9 +1,14 @@
+:root{
+    --morena: #a0423d6f;
+    --rojo: #b5261e;
+    --negro: #000000;
+}
 body{
     font-family: "Pixelify Sans", sans-serif;
-    background-color: #a0423d6f;
+    background-color: var(--morena);
 }
 h1{
-    color: #b5261e;
+    color: var(--rojo);
     font-size: 50px;
     text-align: center;
 }
@@ -23,7 +28,7 @@ input{
 a{
     font-family: "Pixelify Sans", sans-serif;
     text-decoration: none;
-    color: black;
+    color: var(--negro);
 }
 .registro{
     display: flex;
@@ -37,7 +42,7 @@ a{
 #div1, #div2 , #div3{
     width: 75px; 
     height: 75px;
-    border: 2px solid black;
+    border: 2px solid var(--negro);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,7 +56,7 @@ a{
     cursor: grab;
 }
 #div3{
-    background-color: #b5261e;
+    background-color:var(--rojo);
 }
 .drop{
     display: flex;

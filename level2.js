@@ -35,6 +35,8 @@ var balacamioneta
 var camioneta1;
 score=parseInt(sessionStorage.getItem('Score'));
 let tempname=sessionStorage.getItem('tempname');
+let sonido=document.getElementById("audioPlayer");
+let pausadoMusic;
 
 
 var game=new Phaser.Game(config);
@@ -110,7 +112,10 @@ function create(){
     corazon1=corazones.create(1200,27,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
     corazon2=corazones.create(1300,27,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
     corazon3=corazones.create(1400,27,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
-  
+    
+
+    let pausadoMusic = this.add.text(780, 27, 'SILENCIO', { fontSize: '32px', fill: '#ffffff' }).setInteractive();
+    pausadoMusic.on('pointerdown', pausarReanudarSonido);
     
 
     player=this.physics.add.sprite(100,450,'dude').setScale(2);
@@ -218,7 +223,7 @@ function update(){
             player.setVelocityY(-420);
         }
         if(this.input.keyboard.checkDown(cursors.space,500)){
-            
+           
             disparar();
 
         }
@@ -356,6 +361,9 @@ function hitplayer(player,balacamioneta){
 }
 function hitItems(bala,items){
     score+=30
+    const sonido = document.getElementById("balazo");
+    sonido.currentTime = 0; 
+    sonido.play();
     scoreText.setText('Score: '+score)
     items.disableBody(true,true)
     bala.disableBody(true,true)
@@ -375,7 +383,7 @@ function disparar(){
 
     var nuevabala = bala.get(player.x, player.y, direccion === 1 ? 'bala' : 'balaIzq');//wachamos y usamos la direccion de donde esta volteando
 
-
+ 
     nuevabala.setScale(0.2, 0.1);
     nuevabala.setActive(true);
     nuevabala.setVisible(true);
@@ -409,3 +417,12 @@ function camionetadisparo(){
     
 }
 
+function pausarReanudarSonido() {
+    if (sonido.paused) {
+        sonido.play(); 
+
+    } else {
+        sonido.pause(); 
+
+    }
+}

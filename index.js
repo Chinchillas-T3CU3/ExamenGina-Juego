@@ -30,6 +30,10 @@ var morenaGenerada= false;
 var numAleatorio=Math.floor(Math.random()*200);
 let tempname=sessionStorage.getItem('tempname');
 let mono=sessionStorage.getItem('id');
+var pausado;
+let pausas = false;
+let sonido=document.getElementById("audioPlayer");
+let pausadoMusic;
 
 
 
@@ -69,9 +73,11 @@ function create(){
     platforms.create(100,210,'ground').setScale(1, 0.3).refreshBody();
     platforms.create(1350,490,'ground').setScale(1, 0.3).refreshBody();
     platforms.create(40,820,'ground').setScale(10, 0.3).refreshBody().setVisible(false);
-    corazon1=corazones.create(1200,27,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
-    corazon2=corazones.create(1300,27,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
-    corazon3=corazones.create(1400,27,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
+    corazon1=corazones.create(1300,27,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
+    corazon2=corazones.create(1400,27,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
+    corazon3=corazones.create(1500,27,'corazon').setScale(.3,0.3).refreshBody().setVisible(true);
+
+   
   
 
 
@@ -114,9 +120,18 @@ function create(){
     });
     bombs=this.physics.add.group();
     morenas=this.physics.add.group();
+    let fecha =new Date();
+    scoreText = this.add.text(10, 16, 'score: 0', { fontSize: '32px', fill: '#ffffff' });
+    nameText=this.add.text(250,16,`Name: ${tempname}`,{ fontSize: '32px', fill: '#c81d11' })
+    nameText=this.add.text(550,16,fecha.toLocaleDateString(),{ fontSize: '32px', fill: '#c81d11' })
 
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#ffffff' });
-    nameText=this.add.text(450,16,`Name: ${tempname}`,{ fontSize: '32px', fill: '#c81d11' })
+
+
+    let pausadoMusic = this.add.text(780, 27, 'SILENCIO', { fontSize: '32px', fill: '#ffffff' }).setInteractive();
+    pausadoMusic.on('pointerdown', pausarReanudarSonido);
+
+
+
     this.physics.add.collider(player,platforms);
     this.physics.add.collider(stars, platforms);
     this.physics.add.collider(bombs,platforms);
@@ -199,6 +214,9 @@ function update(){
 }
 function collectStar(player,star){
     star.disableBody(true,true);
+    const sonido = document.getElementById("monedas");
+        sonido.currentTime = 0; 
+        sonido.play();
     score+=10;
     scoreText.setText('Score: '+score)
     if (stars.countActive(true) === 0)
@@ -290,10 +308,39 @@ function hitBomb (player, bomb)
 }
 function hitMorenas(player,morena1){
     console.log("entrando en el hit");
-
+    const sonido = document.getElementById("morena");
+        sonido.currentTime = 0; 
+        sonido.play();
     score=score+50;
     scoreText.setText('Score: '+score)
 
     morena1.disableBody(true, true);
 
+}
+function seleccionadoPause() {
+    console.log("Pausa activada");
+    if (pausas) {
+        console.log("primera parte")
+        console.log(pausas)
+        this.physics.pause();
+        player.anims.pauseAll()
+        pausas = false;
+        pausado.setText('PAUSA');
+        console.log(pausas)
+    } else {
+        console.log("primera parte")
+        console.log(pausas)
+        
+        pausas = true;
+        pausado.setText('REANUDAR');
+    }
+}
+function pausarReanudarSonido() {
+    if (sonido.paused) {
+        sonido.play(); 
+
+    } else {
+        sonido.pause(); 
+
+    }
 }
