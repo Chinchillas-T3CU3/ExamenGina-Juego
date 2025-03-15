@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: black;
+    overflow: hidden;
+    position: relative;
+}
+.victory-container {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+.victory-text {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 14rem;
+    color: rgb(227, 65, 65);
+    text-shadow: 3px 3px 10px rgba(156, 14, 14, 0.8);
+    animation: flicker 1.3s infinite alternate;
+}
+h1{
+    margin-top: 1rem;
+}
+.gif-overlay {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 10;
+    left: 0;
+    background: url('images/GifFuegosArtificiales.gif') no-repeat center center/cover;
+    opacity: 0.6; 
+    z-index: 1;
+}
+#back-button {
+    font-family: "Pixelify Sans", sans-serif;
+    position: fixed;
+    bottom: 100px;
+    left: 100px;
+    padding: 20px 24px;
+    background: red;
+    color: white;
+    font-size: 38px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}

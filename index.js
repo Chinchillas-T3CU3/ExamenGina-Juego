@@ -28,6 +28,9 @@ var corazon1,corazon2,corazon3;
 var morena1;
 var morenaGenerada= false;
 var numAleatorio=Math.floor(Math.random()*200);
+let tempname=sessionStorage.getItem('tempname');
+let mono=sessionStorage.getItem('id');
+
 
 
 var game=new Phaser.Game(config);
@@ -39,12 +42,21 @@ function preload(){
     this.load.image('bomb','images/pri.png');
     this.load.image('corazon','images/vidas.png');
     this.load.image('morena','images/morena.png');
-    this.load.spritesheet('dude','images/amlo1.png',{frameWidth:54.2,frameHeight:49});
+    if(mono=='img2'){
+        this.load.spritesheet('dude','images/sheimbaum.png',{frameWidth:51,frameHeight:51});
+    }else if(mono=='img1'){
+        this.load.spritesheet('dude','images/amlo1.png',{frameWidth:54.2,frameHeight:49});
+    }
+    
+    // this.load.spritesheet('dude','images/amlo1.png',{frameWidth:54.2,frameHeight:49});
+
+    
     
 
 }
 function create(){
-    this.add.image(750,420,'sky').setDisplaySize(1800,840);
+    
+    this.add.image(750,420,'sky').setDisplaySize(1850,850);
     // this.add.image(400,300,'star');
     platforms=this.physics.add.staticGroup();
     corazones=this.physics.add.staticGroup();
@@ -104,6 +116,7 @@ function create(){
     morenas=this.physics.add.group();
 
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#ffffff' });
+    nameText=this.add.text(450,16,`Name: ${tempname}`,{ fontSize: '32px', fill: '#c81d11' })
     this.physics.add.collider(player,platforms);
     this.physics.add.collider(stars, platforms);
     this.physics.add.collider(bombs,platforms);
@@ -118,6 +131,9 @@ function create(){
 }
 function update(){
     if(gameOver && vidas==0){
+        sessionStorage.setItem('Score',score);
+        
+         window.location.href="GameOver.html"
         return;
     }
     if (cursors.left.isDown)
@@ -145,7 +161,8 @@ function update(){
         }
         
         if(score>=380){
-            window.location.href="nevel2.html"
+            sessionStorage.setItem('Score',score);
+            window.location.href="NivelCompletado.html"
         }
  
         if (score >=numAleatorio && !morenaGenerada ) {
@@ -209,6 +226,18 @@ function collectStar(player,star){
         bomb.setCollideWorldBounds(true);
         bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
         bomb.allowGravity = false;
+        var bomb = bombs.create(x*3, 16, 'bomb');
+        bomb.setScale(0.5);
+        bomb.setBounce(1);
+        bomb.setCollideWorldBounds(true);
+        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+        bomb.allowGravity = false;
+        var bomb = bombs.create(x*2, 16, 'bomb');
+        bomb.setScale(0.5);
+        bomb.setBounce(1);
+        bomb.setCollideWorldBounds(true);
+        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+        bomb.allowGravity = false;
         
         
 
@@ -217,22 +246,31 @@ function collectStar(player,star){
 }
 function hitBomb (player, bomb)
 {
-        
+ 
     if(vidas==3){
         bomb.disableBody(true, true);
         corazon3.setVisible(false);
+        const sonido = document.getElementById("fuchi");
+        sonido.currentTime = 0; 
+        sonido.play();
         vidas--;
         console.log(vidas)
 
     }else if(vidas==2){
         bomb.disableBody(true, true);
         corazon2.setVisible(false);
+        const sonido = document.getElementById("fuchi");
+        sonido.currentTime = 0; 
+        sonido.play();
         vidas--;
         console.log(vidas)
 
     }else if(vidas ==1) {
         bomb.disableBody(true, true);
         corazon1.setVisible(false);
+        const sonido = document.getElementById("fuchi");
+        sonido.currentTime = 0; 
+        sonido.play();
         vidas--;
         console.log(vidas)
 

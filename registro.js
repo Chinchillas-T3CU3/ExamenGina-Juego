@@ -19,23 +19,33 @@ dropZone.addEventListener("drop", (event) => {
     if (!dropZone.hasChildNodes()) {
             dropZone.appendChild(draggedItem);
     }
-    selectedImage = draggedItem.src;
+    selectedImage = draggedItem.id;
     console.log(selectedImage);
+    sessionStorage.setItem('id',selectedImage);
+    
+    
 });
 function validateName(name) {
     const regex = /^[a-zA-Z0-9_]{4,8}$/;
     return regex.test(name);
 }
-
-function guardarNombre() {
+function guardarNombreTemporal(){
     let name = document.getElementById("nombreplayer").value.trim();
 
     if (!validateName(name)) {
         showAlert("Nombre inválido (debe ser de 4-8 caracteres y solo letras, números o _)");
         return;
     }
+    sessionStorage.setItem('tempname',name);
+    
+    window.location.href='level1.html';
+}
 
-    let score = Math.floor(Math.random() * 100) + 1; 
+
+function guardarNombre() {
+   
+    //aqui debemos de establecer de nuevo el nombre y mandar el score
+    // let score = Math.floor(Math.random() * 100) + 1; 
     let playerIndex = players.findIndex(player => player.name === name);
 
     if (playerIndex !== -1) {
@@ -54,6 +64,8 @@ function guardarNombre() {
     }
 
     localStorage.setItem('players', JSON.stringify(players));
+    //mandamos a la de records
+
 }
 
 function showAlert(message, type = "danger") {

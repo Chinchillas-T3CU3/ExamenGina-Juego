@@ -33,6 +33,8 @@ var camioneta;
 var camionetascreadas=false;
 var balacamioneta
 var camioneta1;
+score=parseInt(sessionStorage.getItem('Score'));
+let tempname=sessionStorage.getItem('tempname');
 
 
 var game=new Phaser.Game(config);
@@ -55,7 +57,7 @@ function preload(){
 
 }
 function create(){
-    this.add.image(750,420,'sky').setDisplaySize(1800,840);
+    this.add.image(750,420,'sky').setDisplaySize(1840,840);
 
     platforms=this.physics.add.staticGroup();
     items=this.physics.add.staticGroup();
@@ -168,7 +170,9 @@ function create(){
     loop: true
     });
 
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#ffffff' });
+ 
+    scoreText = this.add.text(16, 16, 'score: '+score, { fontSize: '32px', fill: '#ffffff' });
+    nameText=this.add.text(450,16,`Name: ${tempname}`,{ fontSize: '32px', fill: '#c81d11' })
     this.physics.add.collider(player,platforms);
     this.physics.add.collider(stars, platforms);
     this.physics.add.collider(bombs,platforms);
@@ -186,6 +190,8 @@ function create(){
 }
 function update(){
     if(gameOver && vidas==0){
+        sessionStorage.setItem('Score',score);
+        window.location.href="GameOver.html"
         return;
     }
     if (cursors.left.isDown)
@@ -215,6 +221,10 @@ function update(){
             
             disparar();
 
+        }
+        if(score>=790){
+            sessionStorage.setItem('Score',score);
+            window.location.href="Felicidades.html";
         }
         
 
@@ -265,18 +275,27 @@ function hitBomb (player, bomb)
     if(vidas==3){
         bomb.disableBody(true, true);
         corazon3.setVisible(false);
+        const sonido = document.getElementById("abrazos");
+        sonido.currentTime = 0; 
+        sonido.play();
         vidas--;
         console.log(vidas)
 
     }else if(vidas==2){
         bomb.disableBody(true, true);
         corazon2.setVisible(false);
+        const sonido = document.getElementById("abrazos");
+        sonido.currentTime = 0; 
+        sonido.play();
         vidas--;
         console.log(vidas)
 
     }else if(vidas ==1) {
         bomb.disableBody(true, true);
         corazon1.setVisible(false);
+        const sonido = document.getElementById("abrazos");
+        sonido.currentTime = 0; 
+        sonido.play();
         vidas--;
         console.log(vidas)
 
@@ -299,18 +318,27 @@ function hitplayer(player,balacamioneta){
     if(vidas==3){
         balacamioneta.disableBody(true, true);
         corazon3.setVisible(false);
+        const sonido = document.getElementById("abrazos");
+        sonido.currentTime = 0; 
+        sonido.play();
         vidas--;
         console.log(vidas)
 
     }else if(vidas==2){
         balacamioneta.disableBody(true, true);
         corazon2.setVisible(false);
+        const sonido = document.getElementById("abrazos");
+        sonido.currentTime = 0; 
+        sonido.play();
         vidas--;
         console.log(vidas)
 
     }else if(vidas ==1) {
         balacamioneta.disableBody(true, true);
         corazon1.setVisible(false);
+        const sonido = document.getElementById("abrazos");
+        sonido.currentTime = 0; 
+        sonido.play();
         vidas--;
         console.log(vidas)
 

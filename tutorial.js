@@ -24,6 +24,6 @@ canvas.addEventListener("click", function (event) {
 
     // Detecta si el clic fue dentro del botón
     if (x >= 390 && x <= 690 && y >= 500 && y <= 580) {
-            window.location.href = "index.html"; 
+            window.location.href = "index1.html"; 
     }
 });

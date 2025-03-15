@@ -10,7 +10,9 @@ function loadScores() {
 
     players.forEach(player => {
         let row = document.createElement("tr");
-        row.innerHTML = `<td>${player.name}</td><td>${player.score}</td>`;
+        const fecha=new Date(player.fechao)
+        
+        row.innerHTML = `<td>${player.name}</td><td>${player.score}</td><td>${fecha.toLocaleDateString()}</td>`;
         tableBody.appendChild(row);
     });
 }
