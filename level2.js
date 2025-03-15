@@ -178,6 +178,7 @@ function create(){
  
     scoreText = this.add.text(16, 16, 'score: '+score, { fontSize: '32px', fill: '#ffffff' });
     nameText=this.add.text(450,16,`Name: ${tempname}`,{ fontSize: '32px', fill: '#c81d11' })
+    this.add.text(990,27,'level2', { fontSize: '32px', fill: '#ffffff' })
     this.physics.add.collider(player,platforms);
     this.physics.add.collider(stars, platforms);
     this.physics.add.collider(bombs,platforms);

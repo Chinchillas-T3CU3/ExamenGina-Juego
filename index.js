@@ -129,6 +129,7 @@ function create(){
 
     let pausadoMusic = this.add.text(780, 27, 'SILENCIO', { fontSize: '32px', fill: '#ffffff' }).setInteractive();
     pausadoMusic.on('pointerdown', pausarReanudarSonido);
+    this.add.text(990,27,'level1', { fontSize: '32px', fill: '#ffffff' })
 
 
 
